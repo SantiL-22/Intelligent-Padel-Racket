@@ -1,57 +1,57 @@
 # Smart Padel Racket
 
-Sistema que clasifica golpes de pádel en tiempo real usando sensores IMU (acelerómetro + giroscopio) montados en la pala y machine learning.
+A system that classifies padel strokes in real-time using IMU sensors (accelerometer + gyroscope) mounted on the racket and machine learning.
 
-## Cómo funciona
+## How it works
 
-1. Un **Arduino con sensor IMU** captura datos de movimiento de la pala
-2. Se entrenan modelos con **TensorFlow** para clasificar los golpes
-3. El modelo se convierte a **TFLite** y se exporta como header C (`model.h`) para ejecutarse directamente en el Arduino
-4. Una **app iOS** se conecta por Bluetooth al Arduino y muestra estadísticas en tiempo real
+1. An **Arduino with an IMU sensor** captures movement data from the racket.
+2. Models are trained using **TensorFlow** to classify the strokes.
+3. The model is converted to **TFLite** and exported as a C header file (`model.h`) to run directly on the Arduino.
+4. An **iOS app** connects to the Arduino via Bluetooth and displays real-time statistics.
 
-### Golpes clasificados
+### Classified Strokes
 
-| Golpe | Descripción |
-|-------|-------------|
-| Drive | Golpe de derecha |
-| Revés | Golpe de revés |
-| Smash | Remate |
-| Bandeja | Golpe defensivo alto |
+| Stroke | Description |
+|--------|-------------|
+| Forehand | Standard forehand stroke (Drive) |
+| Backhand | Standard backhand stroke (Revés) |
+| Smash | Powerful overhead shot |
+| Bandeja | High defensive overhead shot |
 
-## Estructura del repo
+## Repository Structure
 
-```
+```text
 Smart-Padel-Racket/
 ├── training/
-│   ├── Padel detection.ipynb      # Notebook de detección de golpes
-│   ├── Arduino_Exercise.ipynb     # Pipeline: datos → TensorFlow → TFLite → Arduino
-│   ├── Padel_Data/                # Datasets CSV de sensores
+│   ├── Padel detection.ipynb      # Stroke detection notebook
+│   ├── Arduino_Exercise.ipynb     # Pipeline: data → TensorFlow → TFLite → Arduino
+│   ├── Padel_Data/                # Sensor CSV datasets
 │   │   ├── drive.csv
 │   │   ├── reves.csv
 │   │   ├── smash.csv
 │   │   ├── bandeja.csv
 │   │   └── ruido.csv
 │   └── Arduino_Code/
-│       ├── Capture_Data/          # Sketch Arduino para capturar datos del IMU
-│       └── IMU_Classifier/        # Sketch Arduino para inferencia + model.h
-├── images/                        # Capturas de la app iOS
+│       ├── Capture_Data/          # Arduino sketch to capture IMU data
+│       └── IMU_Classifier/        # Arduino sketch for inference + model.h
+├── images/                        # iOS app screenshots
 └── README.md
 ```
 
-## Entrenamiento del modelo
+## Model Training
 
-Los notebooks están en `training/`:
+The notebooks are located in `training/`:
 
-- **`Padel detection.ipynb`** — Exploración y entrenamiento del modelo de detección de golpes
-- **`Arduino_Exercise.ipynb`** — Pipeline completo: carga de CSVs → entrenamiento con TensorFlow → conversión a TFLite → exportación a `model.h` para Arduino
+- **`Padel detection.ipynb`** — Exploration and training of the stroke detection model.
+- **`Arduino_Exercise.ipynb`** — Complete pipeline: loading CSVs → training with TensorFlow → conversion to TFLite → export to `model.h` for Arduino.
 
-Los datos de entrenamiento (`training/Padel_Data/`) son lecturas de acelerómetro y giroscopio capturadas con el sketch `Capture_Data.ino`.
+The training data (`training/Padel_Data/`) consists of accelerometer and gyroscope readings captured using the `Capture_Data.ino` sketch.
 
-## App iOS
+## iOS App
 
-La app está desarrollada en SwiftUI y se conecta al Arduino vía Bluetooth Low Energy (BLE). Tiene tres pantallas: Dashboard, Estadísticas e Historial.
+The app is developed in SwiftUI and connects to the Arduino via Bluetooth Low Energy (BLE). It has three screens: Dashboard, Statistics, and History.
 
-Si quieres ver el código de la app, contáctame.
+If you would like to see the app's source code, feel free to contact me.
 
 <p align="center">
   <img src="images/dashboard.png" width="250" />
@@ -59,12 +59,12 @@ Si quieres ver el código de la app, contáctame.
   <img src="images/historial.png" width="250" />
 </p>
 
-## Requisitos
+## Requirements
 
-- **Arduino:** Arduino Nano 33 BLE Sense (o compatible con IMU), Arduino IDE
-- **Entrenamiento:** Python 3.x, TensorFlow, pandas, numpy
+- **Arduino:** Arduino Nano 33 BLE Sense (or compatible with IMU), Arduino IDE
+- **Training:** Python 3.x, TensorFlow, pandas, numpy
 - **App:** Xcode 16+, iOS 17+
 
-## Autor
+## Author
 
 Santi López
