@@ -24,7 +24,6 @@ A system that classifies padel strokes in real-time using IMU sensors (accelerom
 Smart-Padel-Racket/
 ├── training/
 │   ├── Padel detection.ipynb      # Stroke detection notebook
-│   ├── Arduino_Exercise.ipynb     # Pipeline: data → TensorFlow → TFLite → Arduino
 │   ├── Padel_Data/                # Sensor CSV datasets
 │   │   ├── drive.csv
 │   │   ├── reves.csv
